@@ -27,7 +27,7 @@
 
                   <v-card-actions>
                     <router-link
-                      :to="`/${recipe.title}`"
+                      :to="`/${recipe.id}`"
                       tag="v-btn"
                       flat
                       color="orange"

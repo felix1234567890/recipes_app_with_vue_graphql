@@ -57,25 +57,31 @@ export default {
   }),
   methods: {
     addRecipe() {
-      this.$apollo
-        .mutate({
-          mutation: AddRecipe,
-          variables: {
-            title: this.$data.title,
-            ingredients: this.$data.ingredients,
-            directions: this.$data.directions,
-            published: this.$data.published
-          }
-        })
-        .then(data => {
-          // Result
-          this.$router.push("/");
-        })
-        .catch(error => {
-          // Error
-          console.error(error);
-          // We restore the initial user input
-        });
+      if (
+        this.title.trim() !== "" &&
+        this.ingredients.trim() !== "" &&
+        this.directions.trim() !== ""
+      ) {
+        this.$apollo
+          .mutate({
+            mutation: AddRecipe,
+            variables: {
+              title: this.$data.title,
+              ingredients: this.$data.ingredients,
+              directions: this.$data.directions,
+              published: this.$data.published
+            }
+          })
+          .then(data => {
+            // Result
+            this.$router.push("/");
+          })
+          .catch(error => {
+            // Error
+            console.error(error);
+            // We restore the initial user input
+          });
+      }
     }
   }
 };

@@ -59,37 +59,44 @@ export default {
     recipe: {
       query: Recipe,
       variables() {
-        return { title: this.$route.params.title };
+        return { id: this.$route.params.id };
       },
       result({ data, loading, networkStatus }) {
-        (this.title = this.$route.params.title),
-          (this.ingredients = data.recipe.ingredients),
-          (this.directions = data.recipe.directions);
+        this.title = data.recipe.title;
+        this.ingredients = data.recipe.ingredients;
+        this.directions = data.recipe.directions;
       }
     }
   },
   methods: {
     async editRecipe() {
-      await this.$apollo
-        .mutate({
-          mutation: EditRecipe,
-          variables: {
-            title: this.title,
-            ingredients: this.ingredients,
-            directions: this.directions,
-            published: this.published
-          }
-        })
-        .then(data => {
-          // Result
-          console.log(data);
-          this.$router.push("/");
-        })
-        .catch(error => {
-          // Error
-          console.error(error);
-          // We restore the initial user input
-        });
+      if (
+        this.title !== "" &&
+        this.ingredients !== "" &&
+        this.directions !== ""
+      ) {
+        await this.$apollo
+          .mutate({
+            mutation: EditRecipe,
+            variables: {
+              id: this.$route.params.id,
+              title: this.title,
+              ingredients: this.ingredients,
+              directions: this.directions,
+              published: this.published
+            }
+          })
+          .then(data => {
+            // Result
+            console.log(data);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            // Error
+            console.error(error);
+            // We restore the initial user input
+          });
+      }
     }
   }
 };

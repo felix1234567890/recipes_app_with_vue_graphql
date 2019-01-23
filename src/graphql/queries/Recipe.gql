@@ -1,5 +1,6 @@
-query($title: String) {
-  recipe(where: { title: $title }) {
+query($id: ID!) {
+  recipe(where: { id: $id }) {
+    id
     title
     ingredients
     directions

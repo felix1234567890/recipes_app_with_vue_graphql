@@ -1,6 +1,11 @@
-mutation($title: String!, $ingredients: String!, $directions: String!) {
+mutation(
+  $id: ID!
+  $title: String!
+  $ingredients: String!
+  $directions: String!
+) {
   updateRecipe(
-    where: { title: $title }
+    where: { id: $id }
     data: {
       title: $title
       ingredients: $ingredients

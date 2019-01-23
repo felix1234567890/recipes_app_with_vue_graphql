@@ -2,8 +2,8 @@
   <div>
     <ApolloQuery
       :query="require('@/graphql/queries/Recipe.gql')"
-      :variables="{title:
-      $route.params.title}"
+      :variables="{id:
+      $route.params.id}"
     >
       <template slot-scope="{ result: { data },isLoading }">
         <div v-if="isLoading">Loading...</div>
@@ -42,7 +42,7 @@
                     tag="v-btn"
                   >Back</router-link>
                   <router-link
-                    :to="`/recipe/edit/${data.recipe.title}`"
+                    :to="`/recipe/edit/${data.recipe.id}`"
                     tag="v-btn"
                   >Edit</router-link>
                   <v-btn
@@ -73,7 +73,7 @@ export default {
         .mutate({
           mutation: DeleteRecipe,
           variables: {
-            title: this.$route.params.title
+            id: this.$route.params.id
           }
         })
         .then(data => this.$router.push("/"));

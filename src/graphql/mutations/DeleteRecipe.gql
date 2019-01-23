@@ -1,5 +1,5 @@
-mutation($title: String!) {
-  deleteRecipe(where: { title: $title }) {
+mutation($id: ID!) {
+  deleteRecipe(where: { id: $id }) {
     id
     title
   }
