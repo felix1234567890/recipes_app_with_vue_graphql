@@ -1,0 +1,18 @@
+mutation(
+  $title: String!
+  $ingredients: String!
+  $directions: String!
+  $published: Boolean
+) {
+  createRecipe(
+    data: {
+      title: $title
+      ingredients: $ingredients
+      directions: $directions
+      published: $published
+    }
+  ) {
+    id
+    title
+  }
+}
